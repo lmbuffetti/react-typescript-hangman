@@ -20,7 +20,7 @@ class Hangman extends React.Component<IProps> {
         }
         return (
             <svg height="300" width="300">
-                <g id="body" style={{transform: numError >= 7 ? "translate(0px,90px)" : "translate(0px,0px)"}}>
+                <g id="body" style={{transform: numError >= 7 ? "translate(0px,90px)" : "translate(0px,60px)"}}>
                     <g id="head">
                         <circle cx="200" cy="80" r="20" stroke="black" strokeWidth="4" fill="white"/>
                         {
@@ -52,7 +52,7 @@ class Hangman extends React.Component<IProps> {
                 <line x1="250" y1="250" x2="290" y2="250"/>
                 <line x1="100" y1="250" x2="100" y2="20"/>
                 <line x1="100" y1="20" x2="200" y2="20"/>
-                <line id="rope" x1="200" y1="20" x2="200" y2={numError >= 7 ? "150" : "60"} />
+                <line id="rope" x1="200" y1="20" x2="200" y2={numError >= 7 ? "150" : "120"} />
             </svg>
         )
     }
