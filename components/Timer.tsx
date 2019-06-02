@@ -54,8 +54,9 @@ class Timer extends React.Component<IProps, IState> {
         const { timer, intervalTimer } = this.state;
         const { wrongLetter } = this.props;
         if (wrongLetter.length >= 7) clearInterval(intervalTimer);
+        const perc = (100 * timer) / 30;
         return (
-            <div id="timer">{timer}</div>
+            <div id="timer" style={{width: `${perc}%`}} />
         )
     }
 }

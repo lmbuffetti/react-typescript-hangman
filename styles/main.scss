@@ -1,1 +1,13 @@
-@import "hangman";
+// UTILS
+@import "utils/general",
+"utils/vars";
+
+//COMPONENTS
+@import "component/loading",
+"component/keyboard",
+"component/displayWord",
+"component/timer",
+"component/hangman";
+
+//PAGES
+@import "pages/indexPage";

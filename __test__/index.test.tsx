@@ -44,8 +44,19 @@ it('should setError', ()=>{
 
 it('should check message end game', ()=>{
     const app = shallow(<IndexPages />);
-    app.instance().setState({'win': true});
-    expect(app.find('.endGameResult').text()).toEqual('You Win');
+    app.instance().setState({'win': true, 'loading': false});
+    expect(app.find('.endGameResult').text()).toEqual('Congratulationyou win the game!Restart new game');
     app.instance().setState({'win': false, 'lose': true});
-    expect(app.find('.endGameResult').text()).toEqual('You Lose');
-})
+    expect(app.find('.endGameResult').text()).toEqual('Game Overyou lose the game!Restart new game');
+});
+
+it('should check preload', ()=>{
+    const app = shallow(<IndexPages />);
+    expect(app.find('#loading').exists()).toBe(true);
+});
+
+it('should check hide preload', ()=>{
+    const app = shallow(<IndexPages />);
+    app.instance().setState({'loading': false});
+    expect(app.find('#loading').exists()).toBe(false);
+});

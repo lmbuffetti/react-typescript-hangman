@@ -20,6 +20,7 @@ interface IState {
     val: string,
     win: boolean,
     lose: boolean,
+    loading: boolean,
 }
 
 interface IProps {}
@@ -41,7 +42,9 @@ class IndexPage extends React.Component<IProps, IState> {
             val: '',
             win: false,
             lose: false,
+            loading: true,
         };
+        this.restartGame = this.restartGame.bind(this);
     }
 
     componentDidMount() {
@@ -55,6 +58,7 @@ class IndexPage extends React.Component<IProps, IState> {
                     words,
                     word,
                     displayWord: displayWord(word),
+                    loading: false,
                 });
             })
             .catch((error) => {
@@ -111,36 +115,87 @@ class IndexPage extends React.Component<IProps, IState> {
         })
     }
 
+    restartGame() {
+        const { words } = this.state;
+        const word = randomizeWord(words) || '';
+        this.setState({
+            word,
+            displayWord: displayWord(word),
+            loading: false,
+            disabledKey: false,
+            wrongLetter: [],
+            lose: false,
+            win: false,
+            chooseLetter: [],
+            reset: true,
+        });
+    }
+
     render() {
         const {
-            displayWord, chooseLetter, reset, disabledKey, wrongLetter, win, lose,
+            displayWord, chooseLetter, reset, disabledKey, wrongLetter, win, lose, loading,
         } = this.state;
         return(
-            <div>
+            <div id="wrapper">
+                {
+                    loading && (
+                        <div id="loading">
+                            <div id="loading-center">
+                                <div id="loading-center-absolute">
+                                    <div className="object" id="object_four" />
+                                    <div className="object" id="object_three" />
+                                    <div className="object" id="object_two" />
+                                    <div className="object" id="object_one" />
+                                </div>
+                            </div>
+                        </div>
+                    )
+                }
+                <Timer
+                    reset={reset}
+                    wrongLetter={wrongLetter}
+                    handle={(val) => this.setState({reset: val})}
+                    setError={this.setError.bind(this, '')}
+                />
                 <Hangman
                     wrongLetter={wrongLetter}
                 />
                 <DisplayWord word={displayWord} />
                 {
-                    win && (
-                        <div className="endGameResult">You Win</div>
-                    )
-                }
-                {
-                    lose && (
-                        <div className="endGameResult">You Lose</div>
+                    (win || lose) && (
+                        <div id="modal">
+                            <div className="endGameResult">
+                                {
+                                    win && (
+                                        <span>
+                                            Congratulation<br />
+                                            you win the game!
+                                        </span>
+                                    )
+                                }
+                                {
+                                    lose && (
+                                        <span>
+                                            Game Over<br />
+                                            you lose the game!
+                                        </span>
+                                    )
+                                }
+
+                                <button
+                                    type="button"
+                                    onClick={this.restartGame}
+                                >
+                                    Restart new game
+                                </button>
+                            </div>
+                        </div>
                     )
                 }
                 <Keyboard
                     letters={chooseLetter}
                     click={(val) => this.clickButton(val)}
                     disabledKey={disabledKey}
-                />
-                <Timer
-                    reset={reset}
-                    wrongLetter={wrongLetter}
-                    handle={(val) => this.setState({reset: val})}
-                    setError={this.setError.bind(this, '')}
                 />
             </div>
         );

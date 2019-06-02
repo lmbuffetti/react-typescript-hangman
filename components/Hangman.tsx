@@ -18,7 +18,7 @@ class Hangman extends React.Component<IProps, IState> {
             tee: '',
             door1X: 200,
             door2X: 200,
-            doorY: 300,
+            doorY: 250,
         }
     }
     static defaultProps = {
@@ -28,6 +28,7 @@ class Hangman extends React.Component<IProps, IState> {
     componentWillReceiveProps(): void {
         const { wrongLetter } = this.props;
         const numError = wrongLetter.length;
+        console.log(numError);
         let door1X: number;
         let doorY: number;
         let door2X: number;

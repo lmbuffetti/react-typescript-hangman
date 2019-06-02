@@ -1,0 +1,21 @@
+#wrapKeyboard {
+  max-width: 320px;
+  text-align: center;
+  margin-left: -5px;
+  margin-top: 25px;
+}
+button.keyBoard {
+  border-radius: 50%;
+  background: $primaryBrand;
+  border: none;
+  font-size: 20px;
+  width: 30px;
+  text-align: center;
+  line-height: 30px;
+  color: #FFF;
+  cursor: pointer;
+  margin: 2.5px;
+  &:disabled {
+    opacity: 0.6;
+  }
+}

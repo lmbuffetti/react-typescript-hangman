@@ -5,7 +5,7 @@ type IProps = {
 }
 
 const DisplayWord: React.FunctionComponent<IProps> = ({ word }) => (
-    <div id="timer">
+    <div id="displayWord">
         {
             word.map((item, i) => (
                 <span key={i.toString()}>{item}</span>

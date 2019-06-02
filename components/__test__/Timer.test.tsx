@@ -5,7 +5,7 @@ import Timer from '../Timer'
 
 test('Components', () => {
     const app = shallow(<Timer wrongLetter={['a', 'b', 'c', 'd', 'e', 'f', 'g']} reset={false} />);
-    expect(app.text()).toEqual("30");
+    expect(app.text()).toEqual("");
 
     expect(toJSON(app)).toMatchSnapshot();
 });

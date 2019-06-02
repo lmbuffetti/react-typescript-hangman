@@ -1,0 +1,40 @@
+#displayWord {
+  text-align: center;
+  span {
+    font-size: 20px;
+    margin: 2.5px;
+  }
+}
+
+#modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  padding: 5px;
+  z-index: 2000;
+  .endGameResult {
+    position: fixed;
+    width: 280px;
+    left: 50%;
+    top: 50%;
+    height: 150px;
+    transform: translate(-50%, -50%);
+    background: #F0F0F0;
+    padding: 5px 5px 5px;
+    text-align: center;
+    button {
+      border: none;
+      background: $primaryBrand;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      padding: 15px;
+      color: #FFF;
+    }
+  }
+}

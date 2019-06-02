@@ -18,10 +18,16 @@ class Keyboard extends React.Component<KeyboardProps> {
     render() {
         const { keys, click, letters, disabledKey } = this.props;
         return (
-            <div>
+            <div id="wrapKeyboard">
                 {
                     keys.map((val, i) => (
-                        <button key={i.toString()} onClick={() => click(val)} disabled={letters.indexOf(val) !== -1 || disabledKey}>
+                        <button
+                            type="button"
+                            key={i.toString()}
+                            onClick={() => click(val)}
+                            disabled={letters.indexOf(val) !== -1 || disabledKey}
+                            className="keyBoard"
+                        >
                             {val}
                         </button>
                     ))
