@@ -117,7 +117,6 @@ class IndexPage extends React.Component<IProps, IState> {
         } = this.state;
         return(
             <div>
-                test
                 <Hangman
                     wrongLetter={wrongLetter}
                 />

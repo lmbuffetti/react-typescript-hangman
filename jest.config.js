@@ -1,28 +1,22 @@
 module.exports = {
-    preset: 'ts-jest',
-    testEnvironment: 'node',
     moduleFileExtensions: [
         "ts",
         "tsx",
-        "js"
+        "js",
+        "jsx"
     ],
     transform: {
         "^.+\\.tsx?$": "ts-jest"
     },
-    testMatch: [
-        "**/*.(test|spec).(ts|tsx)"
-    ],
+    testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
     globals: {
         "ts-jest": {
+            "babelConfig": true,
             tsConfig: "./tsconfig.json"
         },
-        "babel-jest": {
-            babelConfig: "./.babelrc"
-        }
     },
     coveragePathIgnorePatterns: [
         "/node_modules/",
-        "enzyme.js"
     ],
     coverageReporters: [
         "json",
@@ -31,7 +25,12 @@ module.exports = {
         "text-summary"
     ],
     moduleNameMapper: {
-        "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/mocks.js",
-        ".+\\.(css|styl|less|sass|scss)$": "jest-transform-css"
+        ".+\\.(css|styl|less|sass|scss)$": "jest-transform-css",
+        "^(app/.+)$": "<rootDir>/src/$1/",
+        "^(components/.+)$": "<rootDir>/src/$1/",
+        "^(stores/.+)$": "<rootDir>/src/$1/",
+        "^(views/.+)$": "<rootDir>/src/$1/",
+        "^(assets/.+)$": "<rootDir>/src/$1/",
+        "^(models/.+)$": "<rootDir>/src/$1/"
     },
 };
