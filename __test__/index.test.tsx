@@ -1,5 +1,5 @@
 import * as React from 'react'
-import IndexPage from '../index'
+import IndexPage from '../pages/index'
 
 describe('Pages', () => {
     describe('Index', () => {
