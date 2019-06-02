@@ -1,6 +1,6 @@
-# Hangman Game realised using TypeScript React Next.js and Jest
+# Hangman Game
 
-The demo version is uploaded to Heroku [![Here](https://deploy.now.sh/static/button.svg)](https://hangman-reactts.herokuapp.com/)
+The demo version is uploaded to Heroku [Demo](https://hangman-reactts.herokuapp.com/)
 
 ## How to use it?
 
