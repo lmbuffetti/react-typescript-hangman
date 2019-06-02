@@ -1,6 +1,7 @@
 {
-  "name": "with-typescript",
+  "name": "hangman_react",
   "version": "1.0.0",
+  "author": "Luigi Mattia Buffetti",
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -21,19 +22,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-decorators": "^7.4.4",
-    "@babel/preset-env": "^7.2.3",
     "@babel/preset-typescript": "^7.3.3",
     "@types/jest": "^24.0.13",
     "@types/next": "^8.0.5",
     "@types/react": "^16.8.19",
     "@types/react-dom": "16.8.4",
-    "babel-jest": "^24.8.0",
-    "babel-plugin-styled-components": "^1.10.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
     "jest": "^24.8.0",
     "jest-transform-css": "^2.0.0",
-    "mocha": "^6.1.4",
     "react-test-renderer": "^16.8.6",
     "ts-jest": "^24.0.2",
     "typescript": "^3.5.1"
