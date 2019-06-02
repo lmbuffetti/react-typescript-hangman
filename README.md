@@ -4,10 +4,10 @@ The demo version is uploaded to Heroku [Demo](https://hangman-reactts.herokuapp.
 
 ### Technology
 
-- Typescript
-- React
-- Next
-- Jest
+- Typescript [Documentation](https://www.typescriptlang.org/)
+- React [Documentation](https://reactjs.org/)
+- Next [Documentation](https://nextjs.org/)
+- Jest [Documentation](https://jestjs.io/)
 
 ## How to use it?
 
