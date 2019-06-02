@@ -4,7 +4,7 @@ import Keyboard from '../components/Keyboard'
 import Hangman from '../components/Hangman'
 import Timer from '../components/Timer'
 import DisplayWord from '../components/DisplayWord'
-import '../styles/main.scss'
+import '../assets/styles/main.scss'
 import { randomizeWord, displayWord } from '../utils/helpers'
 
 
