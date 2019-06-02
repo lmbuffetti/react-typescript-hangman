@@ -20,11 +20,11 @@ describe('componentWillReceiveProps()', () => {
     it('call logUserId once', () => {
         let wrongLetter = ['a', 'b'];
         const component = shallow(<Hangman wrongLetter={['a']}/>);
-// resetting call count from componentWillMount()
+        // resetting call count from componentWillMount()
         wrongLetter = ['a', 'b', 'c'];
         // triggers componentWillReceiveProps
         component.setProps({ wrongLetter });
-// PASS!
+        // PASS!
         //expect(logUserId).to.be.calledOnce.and.calledWith(wrongLetter);
     })
-})
+});

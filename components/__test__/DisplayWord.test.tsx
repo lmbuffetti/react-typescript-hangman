@@ -9,3 +9,13 @@ test('Components', () => {
 
     expect(toJSON(app)).toMatchSnapshot();
 });
+
+it('check Display Word on end game', ()=> {
+    const app = shallow(<DisplayWord word={['a']} />);
+    expect(app.find('#displayWord').find('span').hasClass('wrongWord')).toEqual(false);
+});
+
+it('check Display Word on end game', ()=> {
+    const app = shallow(<DisplayWord word={['a']} lose={true} />);
+    expect(app.find('#displayWord').find('span').hasClass('wrongWord')).toEqual(true);
+});

@@ -115,7 +115,6 @@ class IndexPage extends React.Component<IProps, IState> {
 
     gameOver() {
         const { word } = this.state;
-        console.log(word.split(''));
         this.setState({
             disabledKey: true,
             displayWord: word.split(''),

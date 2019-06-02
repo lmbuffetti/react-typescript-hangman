@@ -1,7 +1,7 @@
 import * as React from "react";
 
 interface IProps {
-    wrongLetter: Array<string>,
+    wrongLetter?: Array<string>,
 }
 
 interface IState {

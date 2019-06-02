@@ -2,7 +2,7 @@ import * as React from "react";
 
 type IProps = {
     word: Array<string>;
-    lose: boolean,
+    lose?: boolean,
 }
 
 const DisplayWord: React.FunctionComponent<IProps> = ({ word, lose = false }) => (
