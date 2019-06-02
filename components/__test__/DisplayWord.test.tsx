@@ -1,8 +1,11 @@
 import * as React from 'react'
-import DisplayWord from "../DisplayWord";
+import { shallow } from 'enzyme';
+import toJSON from 'enzyme-to-json';
+import DisplayWord from '../DisplayWord'
 
-describe('Components', () => {
-    it('should pass', () => {
-        expect(<DisplayWord word={[]}/>).toMatchSnapshot();
-    });
+test('Components', () => {
+    const checkbox = shallow(<DisplayWord word={['a']} />);
+    expect(checkbox.find('span').text()).toEqual("a");
+
+    expect(toJSON(checkbox)).toMatchSnapshot();
 });

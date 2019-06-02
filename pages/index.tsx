@@ -44,9 +44,9 @@ class IndexPage extends React.Component<IProps, IState> {
         };
     }
 
-    componentWillMount(): void {
+    componentDidMount() {
         const self = this;
-        axios.get('https://api.myjson.com/bins/r1ilv')
+        return axios.get('https://api.myjson.com/bins/r1ilv')
             .then((response) => {
                 // handle success
                 const words = response.data.filter((val: string) => val.length >= 5 && val.length < 15);
@@ -123,12 +123,12 @@ class IndexPage extends React.Component<IProps, IState> {
                 <DisplayWord word={displayWord} />
                 {
                     win && (
-                        <div>You Win</div>
+                        <div className="endGameResult">You Win</div>
                     )
                 }
                 {
                     lose && (
-                        <div>You Lose</div>
+                        <div className="endGameResult">You Lose</div>
                     )
                 }
                 <Keyboard

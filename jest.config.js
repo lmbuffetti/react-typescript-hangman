@@ -33,4 +33,10 @@ module.exports = {
         "^(assets/.+)$": "<rootDir>/src/$1/",
         "^(models/.+)$": "<rootDir>/src/$1/"
     },
+    snapshotSerializers: ["enzyme-to-json/serializer"],
+    setupFilesAfterEnv: ["<rootDir>/enzyme.ts"],
+    unmockedModulePathPatterns: [
+        "node_modules/react/",
+        "node_modules/enzyme/"
+    ]
 };

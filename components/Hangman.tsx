@@ -31,7 +31,7 @@ class Hangman extends React.Component<IProps, IState> {
         let door1X: number;
         let doorY: number;
         let door2X: number;
-        if (numError === 7) {
+        if (numError >= 7) {
             door1X = 150;
             doorY = 300;
             door2X = 250;
@@ -56,7 +56,7 @@ class Hangman extends React.Component<IProps, IState> {
             <svg height="300" width="300">
                 <g id="body" style={{transform: numError >= 7 ? "translate(0px,90px)" : "translate(0px,60px)"}}>
                     <g id="head">
-                        <circle cx="200" cy="80" r="20" stroke="black" strokeWidth="4" fill="white"/>
+                        <circle cx="200" cy="80" r="20" stroke="black" strokeWidth="4" fill="white" id="circleHead"/>
                         {
                             numError >= 7 ? (
                                 <g id="xEyes">
