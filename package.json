@@ -6,7 +6,10 @@
     "build": "next build",
     "start": "next start -p $PORT",
     "heroku-postbuild": "npm run build",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@zeit/next-sass": "^1.0.1",
@@ -18,10 +21,18 @@
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.13",
     "@types/next": "^8.0.5",
     "@types/react": "^16.8.19",
     "@types/react-dom": "16.8.4",
-    "typescript": "3.5.1"
+    "babel-core": "^6.26.3",
+    "babel-jest": "^24.8.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "jest": "^24.8.0",
+    "jest-transform-css": "^2.0.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.1"
   },
   "license": "ISC"
 }

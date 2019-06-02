@@ -26,7 +26,7 @@ interface IProps {}
 
 
 class IndexPage extends React.Component<IProps, IState> {
-    constructor(props: any) {
+    constructor(public props: any) {
         super(props);
 
         this.state = {
@@ -42,9 +42,6 @@ class IndexPage extends React.Component<IProps, IState> {
             win: false,
             lose: false,
         };
-        this.clickButton = this.clickButton.bind(this);
-        this.setError = this.setError.bind(this);
-        this.gameOver = this.gameOver.bind(this);
     }
 
     componentWillMount(): void {
@@ -120,6 +117,7 @@ class IndexPage extends React.Component<IProps, IState> {
         } = this.state;
         return(
             <div>
+                test
                 <Hangman
                     wrongLetter={wrongLetter}
                 />

@@ -10,6 +10,9 @@ export interface KeyboardProps {
 class Keyboard extends React.Component<KeyboardProps> {
     static defaultProps = {
         keys: 'abcdefghijklmnopqrstuvwxyz'.split(''),
+        letters: [],
+        click: null,
+        disabledKey: false,
     };
 
     render() {

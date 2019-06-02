@@ -5,6 +5,9 @@ interface IProps {
 }
 
 class Hangman extends React.Component<IProps> {
+    static defaultProps = {
+        wrongLetter: [],
+    }
     render() {
         const { wrongLetter } = this.props;
         const numError = wrongLetter.length;

@@ -13,6 +13,13 @@ interface IState {
 }
 
 class Timer extends React.Component<IProps, IState> {
+    static defaultProps = {
+        reset: false,
+        handle: null,
+        setError: null,
+        wrongLetter: [],
+    };
+
     constructor(props: any) {
         super(props);
         this.state = {
