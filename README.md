@@ -20,7 +20,7 @@ To run the app locally:
 
 ```bash
 git clone https://github.com/lmbuffetti/react-typescript-hangman.git
-cd react-example
+cd react-typescript-hangman
 npm run setup
 npm run dev
 open http://localhost:3000
