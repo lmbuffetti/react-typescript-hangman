@@ -68,7 +68,8 @@ class IndexPage extends React.Component<IProps, IState> {
     }
 
     clickButton(val: string) {
-        const { word, displayWord, chooseLetter } = this.state;
+        const { word, chooseLetter, wrongLetter } = this.state;
+        let { displayWord } = this.state;
         let letter: Array<string> = chooseLetter;
         let win: boolean = false;
         if (word && word.indexOf(val) !== -1) {
@@ -84,6 +85,9 @@ class IndexPage extends React.Component<IProps, IState> {
             }
         } else {
             this.setError(val);
+            if (wrongLetter.length >= 7) {
+                displayWord = word.split('');
+            }
         }
         letter.push(val);
         this.setState({
@@ -110,8 +114,11 @@ class IndexPage extends React.Component<IProps, IState> {
     }
 
     gameOver() {
+        const { word } = this.state;
+        console.log(word.split(''));
         this.setState({
             disabledKey: true,
+            displayWord: word.split(''),
         })
     }
 
@@ -160,44 +167,43 @@ class IndexPage extends React.Component<IProps, IState> {
                 <Hangman
                     wrongLetter={wrongLetter}
                 />
-                <DisplayWord word={displayWord} />
+                <DisplayWord word={displayWord} lose={lose} />
                 {
-                    (win || lose) && (
-                        <div id="modal">
-                            <div className="endGameResult">
-                                {
-                                    win && (
-                                        <span>
+                    (win || lose) ? (
+                        <div className="endGameResult">
+                            {
+                                win && (
+                                    <span>
                                             Congratulation<br />
                                             you win the game!
                                         </span>
-                                    )
-                                }
-                                {
-                                    lose && (
-                                        <span>
+                                )
+                            }
+                            {
+                                lose && (
+                                    <span>
                                             Game Over<br />
                                             you lose the game!
                                         </span>
-                                    )
-                                }
+                                )
+                            }
 
-                                <button
-                                    type="button"
-                                    onClick={this.restartGame}
-                                >
-                                    Restart new game
-                                </button>
-                            </div>
+                            <button
+                                type="button"
+                                onClick={this.restartGame}
+                            >
+                                Restart new game
+                            </button>
                         </div>
+                    ) : (
+                        <Keyboard
+                            letters={chooseLetter}
+                            wrongLetter={wrongLetter}
+                            click={(val) => this.clickButton(val)}
+                            disabledKey={disabledKey}
+                        />
                     )
                 }
-                <Keyboard
-                    letters={chooseLetter}
-                    wrongLetter={wrongLetter}
-                    click={(val) => this.clickButton(val)}
-                    disabledKey={disabledKey}
-                />
             </div>
         );
     }
