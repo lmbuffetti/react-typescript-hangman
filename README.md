@@ -2,6 +2,13 @@
 
 The demo version is uploaded to Heroku [Demo](https://hangman-reactts.herokuapp.com/)
 
+### Technology
+
+- Typescript
+- React
+- Next
+- Jest
+
 ## How to use it?
 
 Requirements:
