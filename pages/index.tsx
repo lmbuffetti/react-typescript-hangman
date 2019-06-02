@@ -194,6 +194,7 @@ class IndexPage extends React.Component<IProps, IState> {
                 }
                 <Keyboard
                     letters={chooseLetter}
+                    wrongLetter={wrongLetter}
                     click={(val) => this.clickButton(val)}
                     disabledKey={disabledKey}
                 />

@@ -5,6 +5,7 @@ export interface KeyboardProps {
     letters: Array<string>,
     click(event: any): void,
     disabledKey: boolean,
+    wrongLetter: Array<string>,
 }
 
 class Keyboard extends React.Component<KeyboardProps> {
@@ -13,10 +14,12 @@ class Keyboard extends React.Component<KeyboardProps> {
         letters: [],
         click: null,
         disabledKey: false,
+        wrongLetter: [],
     };
 
+
     render() {
-        const { keys, click, letters, disabledKey } = this.props;
+        const { keys, click, letters, disabledKey, wrongLetter } = this.props;
         return (
             <div id="wrapKeyboard">
                 {
@@ -26,7 +29,7 @@ class Keyboard extends React.Component<KeyboardProps> {
                             key={i.toString()}
                             onClick={() => click(val)}
                             disabled={letters.indexOf(val) !== -1 || disabledKey}
-                            className="keyBoard"
+                            className={`keyBoard ${wrongLetter.indexOf(val) !== -1 ? 'wrong' : 'correct'}`}
                         >
                             {val}
                         </button>

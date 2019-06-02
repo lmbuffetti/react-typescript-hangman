@@ -5,9 +5,9 @@ import IndexPages from "../pages/index";
 
 
 test('Components', () => {
-    const checkbox = shallow(<IndexPages />);
+    const app = shallow(<IndexPages />);
 
-    expect(toJSON(checkbox)).toMatchSnapshot();
+    expect(toJSON(app)).toMatchSnapshot();
 
 });
 

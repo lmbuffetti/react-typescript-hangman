@@ -4,8 +4,8 @@ import toJSON from 'enzyme-to-json';
 import DisplayWord from '../DisplayWord'
 
 test('Components', () => {
-    const checkbox = shallow(<DisplayWord word={['a']} />);
-    expect(checkbox.find('span').text()).toEqual("a");
+    const app = shallow(<DisplayWord word={['a']} />);
+    expect(app.find('span').text()).toEqual("a");
 
-    expect(toJSON(checkbox)).toMatchSnapshot();
+    expect(toJSON(app)).toMatchSnapshot();
 });

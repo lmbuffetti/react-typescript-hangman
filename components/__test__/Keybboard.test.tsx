@@ -4,9 +4,9 @@ import toJSON from 'enzyme-to-json';
 import Keyboard from "../Keyboard";
 
 test('Components', () => {
-    const checkbox = shallow(<Keyboard keys={['a']} />);
-    expect(checkbox.find('button').text()).toEqual("a");
+    const app = shallow(<Keyboard keys={['a']} />);
+    expect(app.find('button').text()).toEqual("a");
 
-    expect(toJSON(checkbox)).toMatchSnapshot();
+    expect(toJSON(app)).toMatchSnapshot();
 
 });

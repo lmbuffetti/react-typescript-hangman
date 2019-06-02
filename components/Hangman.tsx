@@ -9,6 +9,7 @@ interface IState {
     door1X: number,
     door2X: number,
     doorY: number,
+    wrongLetters: Array<string>,
 }
 
 class Hangman extends React.Component<IProps, IState> {
@@ -19,34 +20,36 @@ class Hangman extends React.Component<IProps, IState> {
             door1X: 200,
             door2X: 200,
             doorY: 250,
+            wrongLetters: [],
         }
     }
     static defaultProps = {
         wrongLetter: [],
     };
 
-    componentWillReceiveProps(): void {
-        const { wrongLetter } = this.props;
-        const numError = wrongLetter.length;
-        console.log(numError);
-        let door1X: number;
-        let doorY: number;
-        let door2X: number;
-        if (numError >= 7) {
-            door1X = 150;
-            doorY = 300;
-            door2X = 250;
-        } else {
-            door1X = 200 - numError;
-            doorY = 250 + (5 * numError);
-            door2X = 200 + numError;
+    componentWillUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>): void {
+        if (prevProps.wrongLetter.length !== prevState.wrongLetters.length) {
+            const { wrongLetter } = this.props;
+            const numError = wrongLetter.length;
+            let door1X: number;
+            let doorY: number;
+            let door2X: number;
+            if (numError >= 7) {
+                door1X = 150;
+                doorY = 300;
+                door2X = 250;
+            } else {
+                door1X = 200 - numError;
+                doorY = 250 + (5 * numError);
+                door2X = 200 + numError;
+            }
+            this.setState({
+                door1X,
+                door2X,
+                doorY,
+                wrongLetters: wrongLetter.slice(0),
+            })
         }
-        this.setState({
-            door1X,
-            door2X,
-            doorY
-
-        })
     }
 
     render() {
