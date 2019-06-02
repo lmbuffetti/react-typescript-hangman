@@ -2,3 +2,4 @@
 /.next
 /.idea
 */__test__/__snapshots__
+/coverage
