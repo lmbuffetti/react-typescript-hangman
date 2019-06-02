@@ -30,14 +30,16 @@ class Timer extends React.Component<IProps, IState> {
 
     componentDidMount(): void {
         const self = this;
-        let intervalTimer = setInterval(() => {
+        let intervalTimer: any = setInterval(() => {
             const { timer } = this.state;
             const { reset, handle, setError } = this.props;
-            let newTimer = reset? 30 : timer - 1;
+            let newTimer:number = 0;
             if (reset) handle(false);
             if (newTimer === 0) {
                 newTimer = 30;
                 setError();
+            } else {
+                newTimer = reset? 30 : timer - 1;
             }
             self.setState({
                 timer : newTimer,

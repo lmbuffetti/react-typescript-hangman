@@ -2,7 +2,7 @@
 export function displayWord(word: string): Array<string> {
     word = word.toLowerCase();
     const guessedWord: Array<string> = [];
-    for (let i = 0; i < word.length; i++) {
+    for (let i: number = 0; i < word.length; i++) {
         if (/[a-zA-Z]/g.test(word[i]) && i !== 0 && i !== word.length - 1) {
             // character at word[i] is a letter, replace with underscore
             guessedWord.push('_');

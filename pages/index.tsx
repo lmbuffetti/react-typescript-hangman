@@ -66,10 +66,10 @@ class IndexPage extends React.Component<IProps, IState> {
     clickButton(val: string) {
         const { word, displayWord, chooseLetter } = this.state;
         let letter: Array<string> = chooseLetter;
-        let win = false;
+        let win: boolean = false;
         if (word && word.indexOf(val) !== -1) {
-            let w = word.toLowerCase();
-            for(let i = 0; i < w.length; i++) {
+            let w: string = word.toLowerCase();
+            for(let i: number = 0; i < w.length; i++) {
                 if(w[i] === val) {
                     displayWord[i] = val;
                 }
@@ -94,7 +94,7 @@ class IndexPage extends React.Component<IProps, IState> {
     setError(val: string) {
         const { wrongLetter } = this.state;
         wrongLetter.push(val);
-        let lose = false;
+        let lose: boolean = false;
         if (wrongLetter.length >= 7) {
             this.gameOver();
             lose = true;

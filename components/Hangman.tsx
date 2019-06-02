@@ -4,23 +4,54 @@ interface IProps {
     wrongLetter: Array<string>,
 }
 
-class Hangman extends React.Component<IProps> {
+interface IState {
+    tee: string,
+    door1X: number,
+    door2X: number,
+    doorY: number,
+}
+
+class Hangman extends React.Component<IProps, IState> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            tee: '',
+            door1X: 200,
+            door2X: 200,
+            doorY: 300,
+        }
+    }
     static defaultProps = {
         wrongLetter: [],
-    }
-    render() {
+    };
+
+    componentWillReceiveProps(): void {
         const { wrongLetter } = this.props;
         const numError = wrongLetter.length;
-        let door1X = 200 - numError;
-        let door1Y = 250 + (5 * numError);
-        let door2X = 200 + numError;
-        let door2Y = 250 + (5 * numError);
+        let door1X: number;
+        let doorY: number;
+        let door2X: number;
         if (numError === 7) {
             door1X = 150;
-            door1Y = 300;
+            doorY = 300;
             door2X = 250;
-            door2Y = 300;
+        } else {
+            door1X = 200 - numError;
+            doorY = 250 + (5 * numError);
+            door2X = 200 + numError;
         }
+        this.setState({
+            door1X,
+            door2X,
+            doorY
+
+        })
+    }
+
+    render() {
+        const { wrongLetter } = this.props;
+        const { door1X, door2X, doorY } = this.state;
+        const numError = wrongLetter.length;
         return (
             <svg height="300" width="300">
                 <g id="body" style={{transform: numError >= 7 ? "translate(0px,90px)" : "translate(0px,60px)"}}>
@@ -50,8 +81,8 @@ class Hangman extends React.Component<IProps> {
                     <line id="legR" x1="200" y1="150" x2="220" y2="190"/>
                 </g>
                 <line x1="10" y1="250" x2="150" y2="250"/>
-                <line id="door1" x1="150" y1="250" x2={door1X} y2={door1Y}/>
-                <line id="door2" x1={door2X} y1={door2Y} x2="250" y2="250"/>
+                <line id="door1" x1="150" y1="250" x2={door1X} y2={doorY}/>
+                <line id="door2" x1={door2X} y1={doorY} x2="250" y2="250"/>
                 <line x1="250" y1="250" x2="290" y2="250"/>
                 <line x1="100" y1="250" x2="100" y2="20"/>
                 <line x1="100" y1="20" x2="200" y2="20"/>
