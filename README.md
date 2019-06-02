@@ -1,28 +1,22 @@
-[![Deploy to now](https://deploy.now.sh/static/button.svg)](https://deploy.now.sh/?repo=https://github.com/zeit/next.js/tree/master/examples/with-typescript)
+# Hangman Game realised using TypeScript React Next.js and Jest
 
-# TypeScript Next.js example
-
-This is a really simple project that show the usage of Next.js with TypeScript.
+The demo version is uploaded to Heroku [![Here](https://deploy.now.sh/static/button.svg)](https://hangman-reactts.herokuapp.com/)
 
 ## How to use it?
 
-### Using `create-next-app`
+Requirements:
+- git
+- Node v6
+- npm v3
 
-Execute [`create-next-app`](https://github.com/segmentio/create-next-app) with [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) or [npx](https://github.com/zkat/npx#readme) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-typescript with-typescript-app
-# or
-yarn create next-app --example with-typescript with-typescript-app
-```
-
-### Download manually
-
-Download the example:
+To run the app locally:
 
 ```bash
-curl https://codeload.github.com/zeit/next.js/tar.gz/canary | tar -xz --strip=2 next.js-canary/examples/with-typescript
-cd with-typescript
+git clone https://github.com/lmbuffetti/react-typescript-hangman.git
+cd react-example
+npm run setup
+npm run dev
+open http://localhost:3000
 ```
 
 Install it and run:
