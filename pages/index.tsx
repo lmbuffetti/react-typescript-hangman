@@ -4,7 +4,6 @@ import Keyboard from '../components/Keyboard'
 import Hangman from '../components/Hangman'
 import Timer from '../components/Timer'
 import DisplayWord from '../components/DisplayWord'
-import '../assets/styles/main.scss'
 import { randomizeWord, displayWord } from '../utils/helpers'
 
 
@@ -49,7 +48,7 @@ class IndexPage extends React.Component<IProps, IState> {
 
     componentDidMount() {
         const self = this;
-        return axios.get('https://api.myjson.com/bins/r1ilv')
+        return axios.get('https://raw.githubusercontent.com/bevacqua/correcthorse/master/wordlist.json')
             .then((response) => {
                 // handle success
                 const words = response.data.filter((val: string) => val.length >= 5 && val.length < 15);

@@ -2,6 +2,7 @@ import React from 'react';
 import App from 'next/app';
 import Head from 'next/head';
 const icon = require('../assets/img/favicon.ico');
+import '../assets/styles/main.scss'
 
 class MyApp extends App {
     static async getInitialProps({ Component, ctx }) {

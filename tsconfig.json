@@ -2,8 +2,11 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "commonjs",
-    "jsx": "react",
-    "lib": ["dom", "es2017"],
+    "jsx": "preserve",
+    "lib": [
+      "dom",
+      "es2017"
+    ],
     "moduleResolution": "node",
     "allowJs": true,
     "noEmit": true,
@@ -18,11 +21,21 @@
     "noImplicitUseStrict": true,
     "typeRoots": [
       "node_modules/@types"
-    ]
+    ],
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true
   },
   "exclude": [
     "node_modules",
     "out",
     ".next"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
   ]
 }
