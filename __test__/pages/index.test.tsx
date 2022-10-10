@@ -1,10 +1,8 @@
 import * as React from 'react'
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import IndexPages from "../../pages";
 
 test('Components', () => {
-    const app = renderer
-      .create(<IndexPages />)
-      .toJSON();
-    expect(app).toMatchSnapshot();
+    const { container } = render(<IndexPages />);
+    expect(container.querySelector('#wrapper')).toBeTruthy();
 });
