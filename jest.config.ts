@@ -28,6 +28,7 @@ const config: Config = {
     setupFilesAfterEnv: [
         "<rootDir>/setupTests.js"
     ],
+    testPathIgnorePatterns: ['./node_modules/'],
     moduleNameMapper: {
         ".+\\.(css|styl|less|sass|scss)$": "jest-transform-css",
         "^(app/.+)$": "<rootDir>/src/$1/",
@@ -37,6 +38,7 @@ const config: Config = {
         "^(assets/.+)$": "<rootDir>/src/$1/",
         "^(models/.+)$": "<rootDir>/src/$1/"
     },
+    moduleDirectories: ['./node_modules', 'src'],
     unmockedModulePathPatterns: [
         "node_modules/react/"
     ]

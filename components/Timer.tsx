@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 interface IProps {
-    reset: boolean,
-    handle(event: any): void,
-    setError(val: string): void,
-    wrongLetter: Array<string>,
+    reset?: boolean,
+    handle?: (event: any) => void,
+    setError?: (val: string) => void,
+    wrongLetter?: string[],
 }
 
 const Timer = (props: IProps) =>{

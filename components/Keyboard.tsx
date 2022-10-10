@@ -1,26 +1,28 @@
 import React from "react";
 
 export interface KeyboardProps {
-    click(event: any): void,
+    click?: (event: any) => void,
     disabledKey?: boolean,
-    letters: Array<string>,
-    wrongLetter: Array<string>,
+    keys?: string[];
+    letters?: Array<string>,
+    wrongLetter?: Array<string>,
 }
 
 const Keyboard = (props: KeyboardProps) => {
-    const keys = 'abcdefghijklmnopqrstuvwxyz'.split('');
     const {
         letters = [],
         click = null,
+        keys = 'abcdefghijklmnopqrstuvwxyz'.split(''),
         disabledKey = false,
         wrongLetter = [],
     } = props;
-    console.log(wrongLetter);
+
     return (
       <div id="wrapKeyboard">
           {
               keys.map((val, i) => (
                 <button
+                  role={`btn${val}`}
                   type="button"
                   key={i.toString()}
                   onClick={() => click(val)}

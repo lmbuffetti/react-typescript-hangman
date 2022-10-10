@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios';
 import Keyboard from '../components/Keyboard'
 import Hangman from '../components/Hangman'
 import Timer from '../components/Timer'
@@ -19,20 +18,18 @@ const IndexPage = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('https://raw.githubusercontent.com/bevacqua/correcthorse/master/wordlist.json')
-          .then((response) => {
-              // handle success
-              const words = response.data.filter((val: string) => val.length >= 5 && val.length < 15);
-              const word = randomizeWord(words) || '';
-              setWord(word);
-              setWords(words);
-              setDisplayWord(displayFormatWord(word));
-              setLoading(false)
-          })
-          .catch((error) => {
-              // handle error
-              console.log(error);
-          });
+        if (process.env.NODE_ENV !== 'test') {
+            fetch('https://raw.githubusercontent.com/bevacqua/correcthorse/master/wordlist.json')
+              .then((response) => response.json())
+              .then((data) => {
+                  const words = data.filter((val: string) => val.length >= 5 && val.length < 15);
+                  const word = randomizeWord(words) || '';
+                  setWord(word);
+                  setWords([]);
+                  setDisplayWord(displayFormatWord(word));
+                  setLoading(false)
+              });
+        }
     }, []);
 
     const clickButton = (val: string) => {
@@ -116,7 +113,6 @@ const IndexPage = () => {
             handle={(val) => setReset(val)}
             setError={(val: string) => setError(val)}
           />
-          {JSON.stringify(wrongLetter)}
           <Hangman
             wrongLetter={wrongLetter}
           />

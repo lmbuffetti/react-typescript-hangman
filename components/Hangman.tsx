@@ -33,7 +33,7 @@ const Hangman = (props: IProps) => {
     }, [wrongLetter])
 
     const numError = wrongLetter.length;
-      console.log(wrongLetter);
+
     return (
       <svg height="300" width="300">
           <g id="body" style={{transform: numError >= 7 ? "translate(0px,90px)" : "translate(0px,60px)"}}>
@@ -61,27 +61,27 @@ const Hangman = (props: IProps) => {
             }
             {
               numError >= 2 && (
-                <line x1="200" y1="100" x2="200" y2="150"/>
+                <line data-testid="neck" id="neck" x1="200" y1="100" x2="200" y2="150"/>
               )
             }
             {
               numError >= 3 && (
-                <line id="armL" x1="200" y1="120" x2="170" y2="140"/>
+                <line data-testid="armL" id="armL" x1="200" y1="120" x2="170" y2="140"/>
               )
             }
             {
               numError >= 4 && (
-                <line id="armR" x1="200" y1="120" x2="230" y2="140"/>
+                <line data-testid="armR" id="armR" x1="200" y1="120" x2="230" y2="140"/>
               )
             }
             {
               numError >= 5 && (
-                <line id="legL" x1="200" y1="150" x2="180" y2="190"/>
+                <line data-testid="legL" id="legL" x1="200" y1="150" x2="180" y2="190"/>
               )
             }
             {
               numError >= 6 && (
-                <line id="legR" x1="200" y1="150" x2="220" y2="190"/>
+                <line data-testid="legR" id="legR" x1="200" y1="150" x2="220" y2="190"/>
               )
             }
 

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import {render, screen} from '@testing-library/react'
-import DisplayWord from '../DisplayWord'
+import DisplayWord from '../../components/DisplayWord'
 
 test('Components', () => {
     render(<DisplayWord word={['a']} />);
