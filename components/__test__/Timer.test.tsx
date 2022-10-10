@@ -1,18 +1,17 @@
 import * as React from 'react'
-import { shallow } from 'enzyme';
-import toJSON from 'enzyme-to-json';
+import renderer from 'react-test-renderer';
 import Timer from '../Timer'
 
 test('Components', () => {
-    const app = shallow(<Timer wrongLetter={['a', 'b', 'c', 'd', 'e', 'f', 'g']} reset={false} />);
+    const app = renderer.create(<Timer wrongLetter={['a', 'b', 'c', 'd', 'e', 'f', 'g']} reset={false} />);
     expect(app.text()).toEqual("");
 
-    expect(toJSON(app)).toMatchSnapshot();
+    expect(app.toJSON()).toMatchSnapshot();
 });
 
 it('should test interval functions', ()=>{
     jest.useFakeTimers();
-    const app = shallow(<Timer />);
+    const app = renderer.create(<Timer />);
     expect(app.state('timer')).toEqual(30);
     app.instance().componentDidMount();
     jest.advanceTimersByTime(5000);

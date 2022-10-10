@@ -1,4 +1,7 @@
-module.exports = {
+import type {Config} from 'jest';
+
+const config: Config = {
+    testEnvironment: "jsdom",
     moduleFileExtensions: [
         "ts",
         "tsx",
@@ -6,15 +9,13 @@ module.exports = {
         "jsx"
     ],
     transform: {
-        "^.+\\.tsx?$": "ts-jest"
+        "^.+\\.tsx?$": ['ts-jest', {
+            "babelConfig": true,
+            diagnostics: true,
+            tsconfig: "./tsconfig.json"
+        }],
     },
     testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
-    globals: {
-        "ts-jest": {
-            "babelConfig": true,
-            tsConfig: "./tsconfig.json"
-        },
-    },
     coveragePathIgnorePatterns: [
         "/node_modules/",
     ],
@@ -23,6 +24,9 @@ module.exports = {
         "lcov",
         "text",
         "text-summary"
+    ],
+    setupFilesAfterEnv: [
+        "<rootDir>/setupTests.js"
     ],
     moduleNameMapper: {
         ".+\\.(css|styl|less|sass|scss)$": "jest-transform-css",
@@ -33,10 +37,9 @@ module.exports = {
         "^(assets/.+)$": "<rootDir>/src/$1/",
         "^(models/.+)$": "<rootDir>/src/$1/"
     },
-    snapshotSerializers: ["enzyme-to-json/serializer"],
-    setupFilesAfterEnv: ["<rootDir>/enzyme.ts"],
     unmockedModulePathPatterns: [
-        "node_modules/react/",
-        "node_modules/enzyme/"
+        "node_modules/react/"
     ]
 };
+
+export default config;

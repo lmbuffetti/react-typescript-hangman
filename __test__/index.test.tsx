@@ -1,22 +1,24 @@
 import * as React from 'react'
-import { shallow } from 'enzyme';
-import toJSON from 'enzyme-to-json';
+import renderer from 'react-test-renderer';
+import ReactTestUtils from 'react-dom/test-utils';
+import {render, screen} from '@testing-library/react';
 import IndexPages from "../pages/index";
 
-
 test('Components', () => {
-    const app = shallow(<IndexPages />);
-
-    expect(toJSON(app)).toMatchSnapshot();
+    render(<IndexPages />);
+    const app = renderer
+      .create(<IndexPages />)
+      .toJSON();
+    expect(app).toMatchSnapshot();
 
 });
 
 it('should clickButton', ()=>{
-    const app = shallow(<IndexPages />);
+    const app = ReactTestUtils.renderIntoDocument(<IndexPages />);
     expect(app.state('val')).toEqual('');
-    app.instance().setState({'word': 'test'});
-    app.instance().setState({'displayWord': ['t', '_', '_', 't']});
-    app.instance().clickButton('e');
+    app.setState({'word': 'test'});
+    app.setState({'displayWord': ['t', '_', '_', 't']});
+    app.clickButton('e');
     expect(app.state('val')).toEqual('e');
     expect(app.state('chooseLetter')).toEqual(['e']);
     expect(app.state('reset')).toEqual(true);
@@ -25,12 +27,12 @@ it('should clickButton', ()=>{
 });
 
 it('should setError', ()=>{
-    const app = shallow(<IndexPages />);
+    const app = renderer.create(<IndexPages />);
     expect(app.state('wrongLetter')).toEqual([]);
     app.instance().setError('a');
     expect(app.state('wrongLetter')).toEqual(['a']);
 
-    const appError = shallow(<IndexPages />);
+    const appError = renderer.create(<IndexPages />);
     expect(appError.state('wrongLetter')).toEqual([]);
     appError.instance().setError('a');
     appError.instance().setError('b');
@@ -43,7 +45,7 @@ it('should setError', ()=>{
 });
 
 it('should check message end game', ()=>{
-    const app = shallow(<IndexPages />);
+    const app = renderer.create(<IndexPages />);
     app.instance().setState({'win': true, 'loading': false});
     expect(app.find('.endGameResult').text()).toEqual('Congratulationyou win the game!Restart new game');
     app.instance().setState({'win': false, 'lose': true});
@@ -51,12 +53,12 @@ it('should check message end game', ()=>{
 });
 
 it('should check preload', ()=>{
-    const app = shallow(<IndexPages />);
+    const app = renderer.create(<IndexPages />);
     expect(app.find('#loading').exists()).toBe(true);
 });
 
 it('should check hide preload', ()=>{
-    const app = shallow(<IndexPages />);
+    const app = renderer.create(<IndexPages />);
     app.instance().setState({'loading': false});
     expect(app.find('#loading').exists()).toBe(false);
 });

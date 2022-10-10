@@ -1,5 +1,5 @@
 // Display the random word on the screen as underscores
-export function displayWord(word: string): Array<string> {
+export function displayFormatWord(word: string): Array<string> {
     word = word.toLowerCase();
     const guessedWord: Array<string> = [];
     for (let i: number = 0; i < word.length; i++) {

@@ -1,210 +1,164 @@
-import * as React from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import Keyboard from '../components/Keyboard'
 import Hangman from '../components/Hangman'
 import Timer from '../components/Timer'
 import DisplayWord from '../components/DisplayWord'
-import { randomizeWord, displayWord } from '../utils/helpers'
+import { randomizeWord, displayFormatWord } from '../utils/helpers'
 
+const IndexPage = () => {
+    const [words, setWords] = useState([]);
+    const [word, setWord] = useState('');
+    const [displayWord, setDisplayWord] = useState([]);
+    const [wrongLetter, setWrongLetter] = useState([]);
+    const [chooseLetter, setChooseLetter] = useState([]);
+    const [disabledKey, setDisabledKey] = useState(false);
+    const [reset, setReset] = useState(false);
+    const [win, setWin] = useState(false);
+    const [lose, setLose] = useState(false);
+    const [loading, setLoading] = useState(true);
 
-interface IState {
-    word: string | null,
-    words: Array<string>,
-    displayWord: Array<string>,
-    wrongLetter: Array<string>,
-    chooseLetter: Array<string>,
-    timer: number,
-    reset: boolean,
-    disabledKey: boolean,
-    val: string,
-    win: boolean,
-    lose: boolean,
-    loading: boolean,
-}
+    useEffect(() => {
+        axios.get('https://raw.githubusercontent.com/bevacqua/correcthorse/master/wordlist.json')
+          .then((response) => {
+              // handle success
+              const words = response.data.filter((val: string) => val.length >= 5 && val.length < 15);
+              const word = randomizeWord(words) || '';
+              setWord(word);
+              setWords(words);
+              setDisplayWord(displayFormatWord(word));
+              setLoading(false)
+          })
+          .catch((error) => {
+              // handle error
+              console.log(error);
+          });
+    }, []);
 
-interface IProps {}
-
-
-class IndexPage extends React.Component<IProps, IState> {
-    constructor(public props: any) {
-        super(props);
-
-        this.state = {
-            words: [],
-            word: '',
-            displayWord: [],
-            wrongLetter: [],
-            chooseLetter: [],
-            timer: 30,
-            reset: false,
-            disabledKey: false,
-            val: '',
-            win: false,
-            lose: false,
-            loading: true,
-        };
-        this.restartGame = this.restartGame.bind(this);
-    }
-
-    componentDidMount() {
-        const self = this;
-        return axios.get('https://raw.githubusercontent.com/bevacqua/correcthorse/master/wordlist.json')
-            .then((response) => {
-                // handle success
-                const words = response.data.filter((val: string) => val.length >= 5 && val.length < 15);
-                const word = randomizeWord(words) || '';
-                self.setState({
-                    words,
-                    word,
-                    displayWord: displayWord(word),
-                    loading: false,
-                });
-            })
-            .catch((error) => {
-                // handle error
-                console.log(error);
-            });
-    }
-
-    clickButton(val: string) {
-        const { word, chooseLetter, wrongLetter } = this.state;
-        let { displayWord } = this.state;
+    const clickButton = (val: string) => {
+        console.log(val, word);
         let letter: Array<string> = chooseLetter;
-        let win: boolean = false;
+        let winGame: boolean = false;
+        let displayWordGame = displayWord;
         if (word && word.indexOf(val) !== -1) {
             let w: string = word.toLowerCase();
             for(let i: number = 0; i < w.length; i++) {
                 if(w[i] === val) {
-                    displayWord[i] = val;
+                    displayWordGame[i] = val;
                 }
             }
-            if (displayWord.indexOf('_') === -1) {
-                this.gameOver();
-                win = true;
+            if (displayWordGame.indexOf('_') === -1) {
+                gameOver();
+                winGame = true;
             }
         } else {
-            this.setError(val);
+            setError(val);
             if (wrongLetter.length >= 7) {
-                displayWord = word.split('');
+                displayWordGame = word.split('');
             }
         }
         letter.push(val);
-        this.setState({
-            displayWord,
-            chooseLetter: letter,
-            reset: true,
-            val,
-            win,
-        });
+        setDisplayWord(displayWordGame);
+        setChooseLetter(letter);
+        setReset(true);
+        setWin(winGame);
     }
 
-    setError(val: string) {
-        const { wrongLetter } = this.state;
-        wrongLetter.push(val);
-        let lose: boolean = false;
+    const setError = (val: string) => {
+        const wrongLetterGame = [...wrongLetter];
+        wrongLetterGame.push(val);
+        let loseGame: boolean = false;
         if (wrongLetter.length >= 7) {
-            this.gameOver();
-            lose = true;
+            gameOver();
+            loseGame = true;
         }
-        this.setState({
-            wrongLetter,
-            lose
-        })
+        setWrongLetter(wrongLetterGame);
+        setLose(loseGame);
     }
 
-    gameOver() {
-        const { word } = this.state;
-        this.setState({
-            disabledKey: true,
-            displayWord: word.split(''),
-        })
+    const gameOver = () => {
+        setDisabledKey(true);
+        setDisplayWord(word.split(''));
     }
 
-    restartGame() {
-        const { words } = this.state;
-        const word = randomizeWord(words) || '';
-        this.setState({
-            word,
-            displayWord: displayWord(word),
-            loading: false,
-            disabledKey: false,
-            wrongLetter: [],
-            lose: false,
-            win: false,
-            chooseLetter: [],
-            reset: true,
-        });
+    const restartGame = () => {
+        const wordGame = randomizeWord(words) || '';
+        setWord(wordGame);
+        setDisplayWord(displayFormatWord(wordGame));
+        setLoading(false);
+        setDisabledKey(false);
+        setWrongLetter([]);
+        setLose(false);
+        setWin(false);
+        setChooseLetter([]);
+        setReset(false);
     }
 
-    render() {
-        const {
-            displayWord, chooseLetter, reset, disabledKey, wrongLetter, win, lose, loading,
-        } = this.state;
-        return(
-            <div id="wrapper">
-                {
-                    loading && (
-                        <div id="loading">
-                            <div id="loading-center">
-                                <div id="loading-center-absolute">
-                                    <div className="object" id="object_four" />
-                                    <div className="object" id="object_three" />
-                                    <div className="object" id="object_two" />
-                                    <div className="object" id="object_one" />
-                                </div>
-                            </div>
-                        </div>
-                    )
-                }
-                <Timer
-                    reset={reset}
-                    wrongLetter={wrongLetter}
-                    handle={(val) => this.setState({reset: val})}
-                    setError={this.setError.bind(this, '')}
+    return (
+      <div id="wrapper">
+          {
+            loading && (
+              <div id="loading">
+                  <div id="loading-center">
+                      <div id="loading-center-absolute">
+                          <div className="object" id="object_four" />
+                          <div className="object" id="object_three" />
+                          <div className="object" id="object_two" />
+                          <div className="object" id="object_one" />
+                      </div>
+                  </div>
+              </div>
+            )
+          }
+          <Timer
+            reset={reset}
+            wrongLetter={wrongLetter}
+            handle={(val) => setReset(val)}
+            setError={(val: string) => setError(val)}
+          />
+          {JSON.stringify(wrongLetter)}
+          <Hangman
+            wrongLetter={wrongLetter}
+          />
+          <DisplayWord word={displayWord} lose={lose} />
+          {
+              (win || lose) ? (
+                <div className="endGameResult">
+                    {
+                      win && (
+                        <span>
+                            Congratulation<br />
+                            you win the game!
+                        </span>
+                      )
+                    }
+                    {
+                      lose && (
+                        <span>
+                            Game Over<br />
+                            you lose the game!
+                        </span>
+                      )
+                    }
+
+                    <button
+                      type="button"
+                      onClick={() => restartGame()}
+                    >
+                        Restart new game
+                    </button>
+                </div>
+              ) : (
+                <Keyboard
+                  click={(val) => clickButton(val)}
+                  disabledKey={disabledKey}
+                  letters={chooseLetter}
+                  wrongLetter={wrongLetter}
                 />
-                <Hangman
-                    wrongLetter={wrongLetter}
-                />
-                <DisplayWord word={displayWord} lose={lose} />
-                {
-                    (win || lose) ? (
-                        <div className="endGameResult">
-                            {
-                                win && (
-                                    <span>
-                                            Congratulation<br />
-                                            you win the game!
-                                        </span>
-                                )
-                            }
-                            {
-                                lose && (
-                                    <span>
-                                            Game Over<br />
-                                            you lose the game!
-                                        </span>
-                                )
-                            }
-
-                            <button
-                                type="button"
-                                onClick={this.restartGame}
-                            >
-                                Restart new game
-                            </button>
-                        </div>
-                    ) : (
-                        <Keyboard
-                            letters={chooseLetter}
-                            wrongLetter={wrongLetter}
-                            click={(val) => this.clickButton(val)}
-                            disabledKey={disabledKey}
-                        />
-                    )
-                }
-            </div>
-        );
-    }
+              )
+          }
+      </div>
+    );
 }
 
 export default IndexPage;

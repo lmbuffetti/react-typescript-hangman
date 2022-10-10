@@ -1,21 +1,19 @@
 import * as React from 'react'
-import { shallow } from 'enzyme';
-import toJSON from 'enzyme-to-json';
+import '@testing-library/jest-dom/extend-expect'
+import {render, screen} from '@testing-library/react'
 import DisplayWord from '../DisplayWord'
 
 test('Components', () => {
-    const app = shallow(<DisplayWord word={['a']} />);
-    expect(app.find('span').text()).toEqual("a");
-
-    expect(toJSON(app)).toMatchSnapshot();
+    render(<DisplayWord word={['a']} />);
+    expect(screen.getByRole('span')).toHaveTextContent('a');
 });
 
 it('check Display Word on end game', ()=> {
-    const app = shallow(<DisplayWord word={['a']} />);
-    expect(app.find('#displayWord').find('span').hasClass('wrongWord')).toEqual(false);
+    const { container } = render(<DisplayWord word={['a']} />);
+    expect(container.querySelector('span').classList.contains('wrongWord')).toBe(false);
 });
 
 it('check Display Word on end game', ()=> {
-    const app = shallow(<DisplayWord word={['a']} lose={true} />);
-    expect(app.find('#displayWord').find('span').hasClass('wrongWord')).toEqual(true);
+    const { container } = render(<DisplayWord word={['a']} lose={true} />);
+    expect(container.querySelector('span').classList.contains('wrongWord')).toBe(true);
 });

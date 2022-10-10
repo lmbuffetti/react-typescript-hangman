@@ -1,64 +1,46 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 
 interface IProps {
     reset: boolean,
     handle(event: any): void,
-    setError(): void,
+    setError(val: string): void,
     wrongLetter: Array<string>,
 }
 
-interface IState {
-    timer: number,
-    intervalTimer: any,
-}
+const Timer = (props: IProps) =>{
+    const {
+        reset = false,
+        handle = null,
+        setError = null,
+        wrongLetter = [],
+    } = props;
 
-class Timer extends React.Component<IProps, IState> {
-    static defaultProps = {
-        reset: false,
-        handle: null,
-        setError: null,
-        wrongLetter: [],
-    };
+    const [timer, setTimer] = useState(30);
+    const [intervalTimer, setInterval] = useState(null);
 
-    constructor(props: any) {
-        super(props);
-        this.state = {
-            timer: 30,
-            intervalTimer: null,
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            let intervalTimer: any = window.setInterval(() => {
+                let newTimer: number = timer;
+                if (reset) handle(false);
+                if (newTimer === 0 || reset) {
+                    setTimer(30);
+                    setError('');
+                } else {
+                    setTimer((prev) => prev - 1);
+                }
+            }, 1000);
+            setInterval(intervalTimer);
         }
-    }
+    }, []);
 
-    componentDidMount(): void {
-        const self = this;
-        let intervalTimer: any = setInterval(() => {
-            const { timer } = this.state;
-            const { reset, handle, setError } = this.props;
-            let newTimer:number = timer;
-            if (reset) handle(false);
-            if (newTimer === 0) {
-                newTimer = 30;
-                setError();
-            } else {
-                newTimer = reset? 30 : timer - 1;
-            }
-            self.setState({
-                timer : newTimer,
-            });
-        }, 1000);
-        this.setState({
-            intervalTimer,
-        })
-    }
+    if (wrongLetter.length >= 7) clearInterval(intervalTimer);
+    const perc = (100 * timer) / 30;
 
-    render() {
-        const { timer, intervalTimer } = this.state;
-        const { wrongLetter } = this.props;
-        if (wrongLetter.length >= 7) clearInterval(intervalTimer);
-        const perc = (100 * timer) / 30;
-        return (
-            <div id="timer" style={{width: `${perc}%`}} />
-        )
-    }
+    return (
+      <div id="timer" style={{width: `${perc}%`}} />
+    )
+
 }
 
 export default Timer;
