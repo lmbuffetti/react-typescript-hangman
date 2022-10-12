@@ -8,7 +8,7 @@
     "start": "next start -p $PORT",
     "type-check": "tsc",
     "test": "jest --coverage",
-    "test:watch": "jest --watch",
+    "clear_jest": "jest --clearCache",
     "test:coverage": "jest --coverage --no-cache"
   },
   "dependencies": {

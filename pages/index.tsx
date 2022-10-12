@@ -25,7 +25,7 @@ const IndexPage = () => {
                   const words = data.filter((val: string) => val.length >= 5 && val.length < 15);
                   const word = randomizeWord(words) || '';
                   setWord(word);
-                  setWords([]);
+                  setWords(words);
                   setDisplayWord(displayFormatWord(word));
                   setLoading(false)
               });
@@ -33,8 +33,7 @@ const IndexPage = () => {
     }, []);
 
     const clickButton = (val: string) => {
-        console.log(val, word);
-        let letter: Array<string> = chooseLetter;
+        let letter: Array<string> = [...chooseLetter];
         let winGame: boolean = false;
         let displayWordGame = displayWord;
         if (word && word.indexOf(val) !== -1) {

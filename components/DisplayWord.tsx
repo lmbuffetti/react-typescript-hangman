@@ -5,14 +5,21 @@ type IProps = {
     lose?: boolean,
 }
 
-const DisplayWord: React.FunctionComponent<IProps> = ({ word, lose = false }) => (
-    <div id="displayWord">
-        {
-            word.map((item, i) => (
+const DisplayWord = (props: IProps) => {
+    const {
+        word,
+        lose = false
+    } = props;
+
+    return (
+      <div id="displayWord">
+          {
+              word.map((item, i) => (
                 <span role="span" key={i.toString()} className={lose ? 'wrongWord' : ''}>{item}</span>
-            ))
-        }
-    </div>
-)
+              ))
+          }
+      </div>
+    )
+}
 
 export default DisplayWord;

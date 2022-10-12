@@ -39,11 +39,11 @@ const Hangman = (props: IProps) => {
           <g id="body" style={{transform: numError >= 7 ? "translate(0px,90px)" : "translate(0px,60px)"}}>
             {
               numError >= 1 && (
-                <g id="head">
+                <g data-testid="head" id="head">
                   <circle cx="200" cy="80" r="20" stroke="black" strokeWidth="4" fill="white" id="circleHead"/>
                   {
                     numError >= 7 ? (
-                      <g id="xEyes">
+                      <g data-testid="xEyes" id="xEyes">
                         <line x1="190" y1="78" x2="196" y2="84"/>
                         <line x1="204" y1="78" x2="210" y2="84"/>
                         <line x1="190" y1="84" x2="196" y2="78"/>
@@ -84,11 +84,6 @@ const Hangman = (props: IProps) => {
                 <line data-testid="legR" id="legR" x1="200" y1="150" x2="220" y2="190"/>
               )
             }
-
-
-
-
-
           </g>
           <line x1="10" y1="250" x2="150" y2="250"/>
           <line id="door1" x1="150" y1="250" x2={door1X} y2={doorY}/>
