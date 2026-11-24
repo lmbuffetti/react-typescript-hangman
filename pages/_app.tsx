@@ -1,6 +1,4 @@
-import React from 'react';
 import Head from 'next/head';
-const icon = require('../assets/img/favicon.ico');
 import '../assets/styles/main.scss'
 
 interface StatelessPage<P = {}> {
@@ -15,7 +13,7 @@ const App: StatelessPage = ({ Component, ...props }) => {
               <title>Hangman</title>
               <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 
-              <link rel="icon" type="image/x-icon" href={icon} />
+              <link rel="icon" type="image/x-icon" href="/favicon.ico" />
           </Head>
           <Component { ...props } />
       </div>

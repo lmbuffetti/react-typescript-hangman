@@ -13,8 +13,8 @@ The demo version is uploaded to Heroku [Demo](https://hangman-reactts.herokuapp.
 
 Requirements:
 - git
-- Node v14
-- npm v6
+- Node v22 or later
+- npm v10 or later
 
 To run the app locally:
 

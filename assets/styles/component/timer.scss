@@ -1,3 +1,5 @@
+@use "../utils/vars" as *;
+
 #timer {
   height: 10px;
   background: $primaryBrand;
