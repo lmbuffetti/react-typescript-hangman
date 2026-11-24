@@ -1,4 +1,3 @@
-import * as React from 'react'
 import Hangman from "../../components/Hangman";
 import {render, screen} from '@testing-library/react';
 

@@ -10,9 +10,8 @@ const config: Config = {
     ],
     transform: {
         "^.+\\.tsx?$": ['ts-jest', {
-            "babelConfig": true,
             diagnostics: true,
-            tsconfig: "./tsconfig.json"
+            tsconfig: "./tsconfig.jest.json",
         }],
     },
     testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
@@ -30,7 +29,7 @@ const config: Config = {
     ],
     testPathIgnorePatterns: ['./node_modules/'],
     moduleNameMapper: {
-        ".+\\.(css|styl|less|sass|scss)$": "jest-transform-css",
+        ".+\\.(css|styl|less|sass|scss)$": "identity-obj-proxy",
         "^(app/.+)$": "<rootDir>/src/$1/",
         "^(components/.+)$": "<rootDir>/src/$1/",
         "^(stores/.+)$": "<rootDir>/src/$1/",
@@ -38,10 +37,7 @@ const config: Config = {
         "^(assets/.+)$": "<rootDir>/src/$1/",
         "^(models/.+)$": "<rootDir>/src/$1/"
     },
-    moduleDirectories: ['./node_modules', 'src'],
-    unmockedModulePathPatterns: [
-        "node_modules/react/"
-    ]
+    moduleDirectories: ['node_modules', 'src'],
 };
 
 export default config;

@@ -1,5 +1,7 @@
-/node_modules
 /.next
+/node_modules
 /.idea
 */__test__/__snapshots__
 /coverage
+next-env.d.ts
+*.tsbuildinfo
